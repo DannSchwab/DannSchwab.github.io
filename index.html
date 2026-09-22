@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Schwab | Portfolio Backend</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --primary-color: #0056b3;
+            --secondary-color: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header h2 {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #bdc3c7;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 5px 15px;
+            border: 1px solid white;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: white;
+            color: #2c3e50;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .project-card {
+            border: 1px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .project-card h4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-tags {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #2c3e50;
+            color: white;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            header { padding: 2rem 1rem; }
+            main { padding: 0 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Daniel Schwab Bullido</h1>
+        <h2>Desarrollador Junior de Software / Backend</h2>
+        <div class="social-links">
+            <a href="https://github.com/DannSchwab" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/daniel-schwab-bullido-35837836b/" target="_blank">LinkedIn</a>
+            <a href="mailto:danschwab121@gmail.com">Email</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="sobre-mi">
+            <h3>Sobre Mí</h3>
+            <p>Estudiante de segundo curso de Desarrollo de Aplicaciones Multiplataforma (DAM), enfocado en desarrollo de software y backend. Tengo una sólida base práctica en programación orientada a objetos (Java) y bases de datos relacionales (MySQL). Cuento con experiencia internacional que respalda mi fluidez práctica en inglés y mi capacidad para trabajar en entornos dinámicos.</p>
+        </section>
+
+        <section id="habilidades">
+            <h3>Tecnologías y Herramientas</h3>
+            <div class="skills-container">
+                <span class="skill-tag">Java</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">C#</span>
+                <span class="skill-tag">MySQL</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">HTML5 & CSS3</span>
+                <span class="skill-tag">Git / GitHub</span>
+            </div>
+        </section>
+
+        <section id="proyectos">
+            <h3>Proyectos</h3>
+            <!-- Tarjeta de Proyecto TFG -->
+            <div class="project-card">
+                <h4>Proyecto de Fin de Grado (TFG) - En desarrollo</h4>
+                <p>Aplicación multiplataforma enfocada en [Aquí escribirás de qué trata tu TFG cuando lo decidas]. El proyecto se centra en la arquitectura backend y la gestión eficiente de datos.</p>
+                <div class="project-tags">
+                    <strong>Stack:</strong> Java, MySQL, GitHub
+                </div>
+            </div>
+            
+            <!-- Puedes copiar y pegar el bloque de arriba para añadir más proyectos en el futuro -->
+        </section>
+
+        <section id="experiencia">
+            <h3>Experiencia Destacada</h3>
+            <ul>
+                <li><strong>Asistente de Organización y Logística</strong> | Ikebana Eventos <em>(2025 - Actualidad)</em></li>
+                <li><strong>Técnico de Soporte Informático (Prácticas)</strong> | Universidad Villanueva <em>(Junio 2026)</em></li>
+                <li><strong>Voluntario de Atención al Público (Inglés 100%)</strong> | Mind Charity Shop, UK <em>(Sep 2024 - Dic 2024)</em></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Daniel Schwab Bullido. Creado para GitHub Pages.</p>
+    </footer>
+
+</body>
+</html>

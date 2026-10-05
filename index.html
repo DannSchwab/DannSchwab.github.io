@@ -3,186 +3,578 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel Schwab | Portfolio Backend</title>
+    <title>Daniel Schwab Bullido | Desarrollador Backend Junior</title>
+    <meta name="description" content="Portfolio de Daniel Schwab Bullido, desarrollador junior de software orientado a backend. Java, Python, C#, MySQL.">
+    <meta name="author" content="Daniel Schwab Bullido">
+    <meta name="theme-color" content="#0f172a">
+
+    <!-- Vista previa al compartir el enlace (LinkedIn, WhatsApp, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Daniel Schwab Bullido | Desarrollador Backend Junior">
+    <meta property="og:description" content="Desarrollador junior de software orientado a backend. Java, Python, C#, MySQL.">
+    <meta property="og:url" content="https://dannschwab.github.io/">
+    <meta property="og:locale" content="es_ES">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232563eb'/><text x='50' y='66' font-size='46' font-family='monospace' font-weight='700' text-anchor='middle' fill='white'>DS</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-color: #f4f7f6;
-            --text-color: #333;
-            --primary-color: #0056b3;
-            --secondary-color: #e0e0e0;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --surface-2: #f1f5f9;
+            --border: #e2e8f0;
+            --text: #0f172a;
+            --text-muted: #475569;
+            --text-subtle: #64748b;
+            --accent: #2563eb;
+            --accent-soft: #dbeafe;
+            --accent-text: #1d4ed8;
+            --success: #16a34a;
+            --shadow: 0 1px 2px rgba(15, 23, 42, .04), 0 4px 16px rgba(15, 23, 42, .06);
+            --radius: 14px;
+            --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        [data-theme="dark"] {
+            --bg: #0b1120;
+            --surface: #111a2e;
+            --surface-2: #17223a;
+            --border: #22304d;
+            --text: #e2e8f0;
+            --text-muted: #a3b1c6;
+            --text-subtle: #7d8ca3;
+            --accent: #60a5fa;
+            --accent-soft: rgba(96, 165, 250, .14);
+            --accent-text: #93c5fd;
+            --success: #4ade80;
+            --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
         }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color .25s ease, color .25s ease;
         }
 
-        header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
+        a { color: var(--accent-text); }
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 6px;
         }
 
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
+        .container { max-width: 960px; margin: 0 auto; padding: 0 1.25rem; }
 
-        header h2 {
-            font-size: 1.2rem;
-            font-weight: 300;
-            color: #bdc3c7;
-            margin-bottom: 1.5rem;
+        /* ---------- Navegación ---------- */
+        .nav {
+            position: sticky; top: 0; z-index: 50;
+            background: color-mix(in srgb, var(--bg) 82%, transparent);
+            backdrop-filter: saturate(180%) blur(12px);
+            -webkit-backdrop-filter: saturate(180%) blur(12px);
+            border-bottom: 1px solid var(--border);
         }
-
-        .social-links a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-            padding: 5px 15px;
-            border: 1px solid white;
-            border-radius: 20px;
-            transition: all 0.3s ease;
+        .nav-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            height: 64px;
         }
-
-        .social-links a:hover {
-            background-color: white;
-            color: #2c3e50;
+        .logo {
+            font-family: var(--mono); font-weight: 500; font-size: .95rem;
+            color: var(--text); text-decoration: none;
         }
-
-        main {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 2rem;
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; align-items: center; gap: .25rem; list-style: none; }
+        .nav-links a {
+            color: var(--text-muted); text-decoration: none; font-size: .9rem; font-weight: 500;
+            padding: .4rem .75rem; border-radius: 8px; transition: color .2s, background .2s;
         }
-
-        section {
-            margin-bottom: 3rem;
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        .nav-links a:hover { color: var(--text); background: var(--surface-2); }
+        .theme-toggle {
+            display: grid; place-items: center;
+            width: 38px; height: 38px; margin-left: .5rem;
+            background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+            color: var(--text-muted); cursor: pointer; transition: color .2s, border-color .2s;
         }
+        .theme-toggle:hover { color: var(--text); border-color: var(--text-subtle); }
+        .theme-toggle svg { width: 18px; height: 18px; }
+        .icon-sun { display: none; }
+        [data-theme="dark"] .icon-sun { display: block; }
+        [data-theme="dark"] .icon-moon { display: none; }
 
-        h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 0.5rem;
+        /* ---------- Hero ---------- */
+        .hero { padding-top: 5.5rem; padding-bottom: 4rem; }
+        .status {
+            display: inline-flex; align-items: center; gap: .5rem;
+            font-size: .85rem; font-weight: 500; color: var(--text-muted);
+            background: var(--surface); border: 1px solid var(--border);
+            padding: .35rem .85rem; border-radius: 999px; margin-bottom: 1.5rem;
         }
-
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+        .status-dot {
+            width: 8px; height: 8px; border-radius: 50%; background: var(--success);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--success) 25%, transparent);
         }
-
-        .skill-tag {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-        }
-
-        .project-card {
-            border: 1px solid var(--secondary-color);
-            padding: 1.5rem;
-            border-radius: 5px;
+        .hero h1 {
+            font-size: clamp(2.2rem, 6vw, 3.6rem);
+            font-weight: 800; line-height: 1.1; letter-spacing: -.03em;
             margin-bottom: 1rem;
         }
+        .hero h1 .accent { color: var(--accent); }
+        .hero-role {
+            font-family: var(--mono); font-size: clamp(.95rem, 2.4vw, 1.1rem);
+            color: var(--text-muted); margin-bottom: 1.25rem;
+        }
+        .hero-role::before { content: '> '; color: var(--accent); }
+        .hero p.lead {
+            font-size: 1.1rem; color: var(--text-muted); max-width: 620px; margin-bottom: 2rem;
+        }
+        .cta { display: flex; flex-wrap: wrap; gap: .75rem; }
+        .btn {
+            display: inline-flex; align-items: center; gap: .5rem;
+            font-size: .95rem; font-weight: 600; text-decoration: none;
+            padding: .7rem 1.2rem; border-radius: 10px;
+            border: 1px solid var(--border); background: var(--surface); color: var(--text);
+            transition: transform .15s ease, border-color .2s, background .2s, box-shadow .2s;
+        }
+        .btn:hover { transform: translateY(-2px); border-color: var(--text-subtle); box-shadow: var(--shadow); }
+        .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+        [data-theme="dark"] .btn-primary { color: #0b1120; }
+        .btn-primary:hover { border-color: var(--accent); filter: brightness(1.08); }
+        .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 
-        .project-card h4 {
-            margin-bottom: 0.5rem;
+        /* ---------- Secciones ---------- */
+        section { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+        .section-head { display: flex; align-items: baseline; gap: .75rem; margin-bottom: 1.75rem; }
+        .section-num { font-family: var(--mono); color: var(--accent); font-size: .95rem; }
+        .section-head h2 { font-size: 1.6rem; font-weight: 700; letter-spacing: -.02em; }
+        .section-head::after {
+            content: ''; flex: 1; height: 1px; background: var(--border); align-self: center; margin-left: .5rem;
         }
-        
-        .project-tags {
-            margin-top: 10px;
-            font-size: 0.8rem;
-            color: #666;
+
+        .card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.75rem;
+            box-shadow: var(--shadow);
         }
+
+        /* Sobre mí */
+        .about-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1.25rem; }
+        .about-text p { color: var(--text-muted); }
+        .about-text p + p { margin-top: 1rem; }
+        .about-text strong { color: var(--text); font-weight: 600; }
+        .facts { list-style: none; display: grid; gap: 1rem; }
+        .facts li { display: flex; gap: .85rem; align-items: flex-start; }
+        .facts .ico {
+            flex-shrink: 0; width: 38px; height: 38px; display: grid; place-items: center;
+            background: var(--accent-soft); color: var(--accent-text); border-radius: 10px;
+        }
+        .facts .ico svg { width: 18px; height: 18px; }
+        .facts .label { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--text-subtle); font-weight: 600; }
+        .facts .value { font-weight: 600; font-size: .95rem; line-height: 1.4; }
+
+        /* Habilidades */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.25rem; }
+        .skill-group h3 {
+            font-size: .8rem; text-transform: uppercase; letter-spacing: .08em;
+            color: var(--text-subtle); font-weight: 600; margin-bottom: .9rem;
+        }
+        .tags { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; }
+        .tag {
+            font-family: var(--mono); font-size: .82rem; font-weight: 500;
+            padding: .35rem .75rem; border-radius: 8px;
+            background: var(--accent-soft); color: var(--accent-text);
+        }
+        .tag.neutral { background: var(--surface-2); color: var(--text-muted); }
+
+        /* Proyectos */
+        .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+        .project { display: flex; flex-direction: column; transition: transform .2s ease, border-color .2s; }
+        .project:hover { transform: translateY(-4px); border-color: var(--accent); }
+        .project-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .project-top .folder { color: var(--accent); width: 34px; height: 34px; }
+        .project-links { display: flex; gap: .6rem; }
+        .project-links a { color: var(--text-subtle); transition: color .2s; }
+        .project-links a:hover { color: var(--accent); }
+        .project-links svg { width: 20px; height: 20px; }
+        .badge {
+            display: inline-block; font-size: .72rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: .05em;
+            padding: .2rem .55rem; border-radius: 6px;
+            background: color-mix(in srgb, #f59e0b 18%, transparent); color: #b45309;
+        }
+        [data-theme="dark"] .badge { color: #fbbf24; }
+        .project h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: .5rem; line-height: 1.35; }
+        .project p { color: var(--text-muted); font-size: .95rem; flex: 1; }
+        .project .tags { margin-top: 1.25rem; }
+        .project .tag { font-size: .75rem; padding: .25rem .6rem; }
+
+        /* Experiencia (línea temporal) */
+        .timeline { list-style: none; position: relative; padding-left: 1.75rem; }
+        .timeline::before {
+            content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px;
+            width: 2px; background: var(--border);
+        }
+        .timeline li { position: relative; padding-bottom: 2rem; }
+        .timeline li:last-child { padding-bottom: 0; }
+        .timeline li::before {
+            content: ''; position: absolute; left: calc(-1.75rem + 1px); top: 7px;
+            width: 12px; height: 12px; border-radius: 50%;
+            background: var(--surface); border: 2px solid var(--accent);
+        }
+        .timeline .date { font-family: var(--mono); font-size: .82rem; color: var(--accent-text); }
+        .timeline h3 { font-size: 1.05rem; font-weight: 700; margin: .15rem 0; }
+        .timeline .org { color: var(--text-muted); font-weight: 500; }
+        .timeline .desc { color: var(--text-muted); font-size: .93rem; margin-top: .4rem; }
+
+        /* Formación + idiomas */
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+        .edu h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: .2rem; }
+        .edu .org { color: var(--text-muted); font-size: .95rem; }
+        .lang-list { list-style: none; display: grid; gap: 1rem; }
+        .lang-row { display: flex; justify-content: space-between; font-weight: 600; font-size: .95rem; margin-bottom: .35rem; }
+        .lang-row span:last-child { color: var(--text-subtle); font-weight: 500; font-size: .88rem; }
+        .bar { height: 6px; border-radius: 99px; background: var(--surface-2); overflow: hidden; }
+        .bar i { display: block; height: 100%; background: var(--accent); border-radius: 99px; }
+        .card-title {
+            font-size: .8rem; text-transform: uppercase; letter-spacing: .08em;
+            color: var(--text-subtle); font-weight: 600; margin-bottom: 1.1rem;
+        }
+
+        /* Contacto */
+        .contact { text-align: center; padding: 3rem 1.75rem; }
+        .contact h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; letter-spacing: -.02em; margin-bottom: .75rem; }
+        .contact p { color: var(--text-muted); max-width: 520px; margin: 0 auto 1.75rem; }
+        .contact .cta { justify-content: center; }
 
         footer {
-            text-align: center;
-            padding: 2rem;
-            background-color: #2c3e50;
-            color: white;
-            margin-top: 2rem;
+            border-top: 1px solid var(--border);
+            padding: 2rem 0; margin-top: 2rem;
+            text-align: center; color: var(--text-subtle); font-size: .88rem;
         }
 
-        @media (max-width: 600px) {
-            header { padding: 2rem 1rem; }
-            main { padding: 0 1rem; }
+        /* Animación de entrada */
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .btn:hover, .project:hover { transform: none; }
+        }
+
+        @media (max-width: 760px) {
+            .nav-links li:not(:last-child) { display: none; }
+            .about-grid, .two-col { grid-template-columns: 1fr; }
+            .hero { padding-top: 3.5rem; padding-bottom: 2.5rem; }
+            section { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+            .card { padding: 1.35rem; }
+        }
+
+        /* Al imprimir (Ctrl+P) sale limpio, como un CV */
+        @media print {
+            .nav, .theme-toggle, .cta, .contact { display: none !important; }
+            body { background: #fff; color: #000; }
+            .card { box-shadow: none; border-color: #ccc; break-inside: avoid; }
+            .reveal { opacity: 1; transform: none; }
+            section { padding: 1.25rem 0; }
+            .hero { padding: 1rem 0; }
         }
     </style>
+
+    <!-- Aplica el tema antes de pintar para evitar parpadeo -->
+    <script>
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('theme'); } catch (e) {}
+            if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
 </head>
 <body>
 
-    <header>
-        <h1>Daniel Schwab Bullido</h1>
-        <h2>Desarrollador Junior de Software / Backend</h2>
-        <div class="social-links">
-            <a href="https://github.com/DannSchwab" target="_blank">GitHub</a>
-            <a href="https://www.linkedin.com/in/daniel-schwab-bullido-35837836b/" target="_blank">LinkedIn</a>
-            <a href="mailto:danschwab121@gmail.com">Email</a>
+    <nav class="nav" aria-label="Principal">
+        <div class="container nav-inner">
+            <a href="#inicio" class="logo">daniel<span>.</span>schwab</a>
+            <ul class="nav-links">
+                <li><a href="#sobre-mi">Sobre mí</a></li>
+                <li><a href="#habilidades">Stack</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#experiencia">Experiencia</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar entre modo claro y oscuro">
+                        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </button>
+                </li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
-    <main>
-        <section id="sobre-mi">
-            <h3>Sobre Mí</h3>
-            <p>Estudiante de segundo curso de Desarrollo de Aplicaciones Multiplataforma (DAM), enfocado en desarrollo de software y backend. Tengo una sólida base práctica en programación orientada a objetos (Java) y bases de datos relacionales (MySQL). Cuento con experiencia internacional que respalda mi fluidez práctica en inglés y mi capacidad para trabajar en entornos dinámicos.</p>
-        </section>
+    <main id="inicio">
+        <!-- ================= HERO ================= -->
+        <header class="hero container">
+            <div class="status"><span class="status-dot"></span>Disponible para prácticas · marzo 2027</div>
+            <h1>Hola, soy <span class="accent">Daniel Schwab Bullido</span></h1>
+            <div class="hero-role">Desarrollador Junior de Software / Backend</div>
+            <p class="lead">
+                Estudiante de DAM centrado en backend: programación orientada a objetos con
+                <strong>Java</strong> y bases de datos relacionales con <strong>MySQL</strong>.
+                Inglés fluido gracias a mi experiencia trabajando en Reino Unido.
+            </p>
+            <div class="cta">
+                <a class="btn btn-primary" href="mailto:danschwab121@gmail.com">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+                    Contactar
+                </a>
+                <a class="btn" href="https://github.com/DannSchwab" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+                    GitHub
+                </a>
+                <a class="btn" href="https://www.linkedin.com/in/daniel-schwab-bullido-35837836b/" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+                    LinkedIn
+                </a>
+                <!-- Cuando subas tu CV en PDF al repo (p. ej. cv-daniel-schwab.pdf), descomenta esto:
+                <a class="btn" href="cv-daniel-schwab.pdf" download>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                    Descargar CV
+                </a>
+                -->
+            </div>
+        </header>
 
-        <section id="habilidades">
-            <h3>Tecnologías y Herramientas</h3>
-            <div class="skills-container">
-                <span class="skill-tag">Java</span>
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">C#</span>
-                <span class="skill-tag">MySQL</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">HTML5 & CSS3</span>
-                <span class="skill-tag">Git / GitHub</span>
+        <!-- ================= SOBRE MÍ ================= -->
+        <section id="sobre-mi" class="container reveal">
+            <div class="section-head"><span class="section-num">01.</span><h2>Sobre mí</h2></div>
+            <div class="about-grid">
+                <div class="card about-text">
+                    <p>
+                        Estudiante de segundo curso de <strong>Desarrollo de Aplicaciones Multiplataforma (DAM)</strong>,
+                        enfocado en desarrollo de software y backend. Tengo una sólida base práctica en
+                        <strong>programación orientada a objetos (Java)</strong> y <strong>bases de datos relacionales (MySQL)</strong>.
+                    </p>
+                    <p>
+                        Cuento con experiencia internacional que respalda mi fluidez práctica en inglés y mi
+                        capacidad para trabajar en entornos dinámicos, tanto en soporte técnico como en
+                        atención al público y organización de eventos.
+                    </p>
+                </div>
+                <ul class="card facts">
+                    <li>
+                        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span>
+                        <div><div class="label">Formación</div><div class="value">CFGS DAM · 2º curso</div></div>
+                    </li>
+                    <li>
+                        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+                        <div><div class="label">Enfoque</div><div class="value">Backend y bases de datos</div></div>
+                    </li>
+                    <li>
+                        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+                        <div><div class="label">Idiomas</div><div class="value">Español · Inglés fluido</div></div>
+                    </li>
+                </ul>
             </div>
         </section>
 
-        <section id="proyectos">
-            <h3>Proyectos</h3>
-            <!-- Tarjeta de Proyecto TFG -->
-            <div class="project-card">
-                <h4>Proyecto de Fin de Grado (TFG) - En desarrollo</h4>
-                <p>Aplicación multiplataforma enfocada en [Aquí escribirás de qué trata tu TFG cuando lo decidas]. El proyecto se centra en la arquitectura backend y la gestión eficiente de datos.</p>
-                <div class="project-tags">
-                    <strong>Stack:</strong> Java, MySQL, GitHub
+        <!-- ================= HABILIDADES ================= -->
+        <section id="habilidades" class="container reveal">
+            <div class="section-head"><span class="section-num">02.</span><h2>Tecnologías y herramientas</h2></div>
+            <div class="skills-grid">
+                <div class="card skill-group">
+                    <h3>Lenguajes</h3>
+                    <ul class="tags">
+                        <li class="tag">Java</li>
+                        <li class="tag">Python</li>
+                        <li class="tag">C#</li>
+                        <li class="tag">JavaScript</li>
+                    </ul>
+                </div>
+                <div class="card skill-group">
+                    <h3>Bases de datos</h3>
+                    <ul class="tags">
+                        <li class="tag">MySQL</li>
+                        <li class="tag neutral">SQL</li>
+                    </ul>
+                </div>
+                <div class="card skill-group">
+                    <h3>Web y herramientas</h3>
+                    <ul class="tags">
+                        <li class="tag">HTML5 &amp; CSS3</li>
+                        <li class="tag">Git</li>
+                        <li class="tag">GitHub</li>
+                    </ul>
                 </div>
             </div>
-            
-            <!-- Puedes copiar y pegar el bloque de arriba para añadir más proyectos en el futuro -->
         </section>
 
-        <section id="experiencia">
-            <h3>Experiencia Destacada</h3>
-            <ul>
-                <li><strong>Asistente de Organización y Logística</strong> | Ikebana Eventos <em>(2025 - Actualidad)</em></li>
-                <li><strong>Técnico de Soporte Informático (Prácticas)</strong> | Universidad Villanueva <em>(Junio 2026)</em></li>
-                <li><strong>Voluntario de Atención al Público (Inglés 100%)</strong> | Mind Charity Shop, UK <em>(Sep 2024 - Dic 2024)</em></li>
-            </ul>
+        <!-- ================= PROYECTOS ================= -->
+        <section id="proyectos" class="container reveal">
+            <div class="section-head"><span class="section-num">03.</span><h2>Proyectos</h2></div>
+            <div class="projects">
+
+                <!-- Proyecto: TFG -->
+                <article class="card project">
+                    <div class="project-top">
+                        <svg class="folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <span class="badge">En desarrollo</span>
+                    </div>
+                    <h3>Proyecto de Fin de Grado (TFG)</h3>
+                    <!-- TODO: cuando tengas el tema, describe aquí qué problema resuelve y qué parte has construido tú -->
+                    <p>Aplicación multiplataforma centrada en la arquitectura backend y la gestión eficiente de datos.</p>
+                    <ul class="tags">
+                        <li class="tag">Java</li>
+                        <li class="tag">MySQL</li>
+                        <li class="tag">Git</li>
+                    </ul>
+                </article>
+
+                <!-- Proyecto: este portfolio -->
+                <article class="card project">
+                    <div class="project-top">
+                        <svg class="folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <div class="project-links">
+                            <a href="https://github.com/DannSchwab/DannSchwab.github.io" target="_blank" rel="noopener noreferrer" aria-label="Código en GitHub">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <h3>Portfolio personal</h3>
+                    <p>Web estática sin frameworks, adaptable a móvil, con modo claro/oscuro, accesible y desplegada con GitHub Pages.</p>
+                    <ul class="tags">
+                        <li class="tag">HTML5</li>
+                        <li class="tag">CSS3</li>
+                        <li class="tag">JavaScript</li>
+                    </ul>
+                </article>
+
+                <!--
+                    PLANTILLA para añadir más proyectos (copia, pega y rellena):
+
+                <article class="card project">
+                    <div class="project-top">
+                        <svg class="folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <div class="project-links">
+                            <a href="URL_DEL_REPO" target="_blank" rel="noopener noreferrer" aria-label="Código en GitHub">GitHub</a>
+                        </div>
+                    </div>
+                    <h3>Nombre del proyecto</h3>
+                    <p>Qué hace, qué problema resuelve y qué has aprendido.</p>
+                    <ul class="tags">
+                        <li class="tag">Java</li>
+                    </ul>
+                </article>
+                -->
+            </div>
+        </section>
+
+        <!-- ================= EXPERIENCIA ================= -->
+        <section id="experiencia" class="container reveal">
+            <div class="section-head"><span class="section-num">04.</span><h2>Experiencia</h2></div>
+            <div class="card">
+                <ol class="timeline">
+                    <li>
+                        <div class="date">2025 — Actualidad</div>
+                        <h3>Asistente de Organización y Logística</h3>
+                        <div class="org">Ikebana Eventos</div>
+                        <!-- <p class="desc">Opcional: 1 línea con lo que haces o un logro concreto.</p> -->
+                    </li>
+                    <li>
+                        <div class="date">Jun 2026</div>
+                        <h3>Técnico de Soporte Informático (Prácticas)</h3>
+                        <div class="org">Universidad Villanueva</div>
+                        <p class="desc">Prácticas formativas de primer curso de DAM.</p>
+                        <!-- Opcional: añade incidencias resueltas, equipos o software que usaste -->
+                    </li>
+                    <li>
+                        <div class="date">Sep 2024 — Dic 2024</div>
+                        <h3>Voluntario de Atención al Público</h3>
+                        <div class="org">Mind Charity Shop · Reino Unido</div>
+                        <p class="desc">Atención al cliente en un entorno 100% en inglés.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ================= FORMACIÓN E IDIOMAS ================= -->
+        <section id="formacion" class="container reveal">
+            <div class="section-head"><span class="section-num">05.</span><h2>Formación e idiomas</h2></div>
+            <div class="two-col">
+                <div class="card edu">
+                    <div class="card-title">Formación</div>
+                    <h3>CFGS Desarrollo de Aplicaciones Multiplataforma</h3>
+                    <!-- TODO: añade el nombre de tu centro, p. ej. "IES ... · 2025 — 2027" -->
+                    <div class="org">2025 — 2027 · Cursando 2º curso</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Idiomas</div>
+                    <ul class="lang-list">
+                        <li>
+                            <div class="lang-row"><span>Español</span><span>Nativo</span></div>
+                            <div class="bar"><i style="width:100%"></i></div>
+                        </li>
+                        <li>
+                            <div class="lang-row"><span>Inglés</span><span>Fluido · experiencia en UK</span></div>
+                            <div class="bar"><i style="width:85%"></i></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CONTACTO ================= -->
+        <section id="contacto" class="container reveal">
+            <div class="card contact">
+                <h2>¿Hablamos?</h2>
+                <p>A partir de marzo de 2027 haré mis prácticas de DAM en empresa. Si buscas a alguien con ganas de aprender backend y crees que puedo encajar en tu equipo, escríbeme.</p>
+                <div class="cta">
+                    <a class="btn btn-primary" href="mailto:danschwab121@gmail.com">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+                        danschwab121@gmail.com
+                    </a>
+                    <a class="btn" href="https://www.linkedin.com/in/daniel-schwab-bullido-35837836b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Daniel Schwab Bullido. Creado para GitHub Pages.</p>
+        <div class="container">© <span id="year">2026</span> Daniel Schwab Bullido · Hecho a mano con HTML, CSS y JS</div>
     </footer>
 
+    <script>
+        // Modo claro / oscuro
+        document.getElementById('themeToggle').addEventListener('click', function () {
+            var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            try { localStorage.setItem('theme', next); } catch (e) {}
+        });
+
+        // Año automático en el pie
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Aparición suave de secciones al hacer scroll
+        var items = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+                });
+            }, { threshold: 0.12 });
+            items.forEach(function (el) { io.observe(el); });
+        } else {
+            items.forEach(function (el) { el.classList.add('visible'); });
+        }
+    </script>
 </body>
 </html>
